@@ -11,6 +11,7 @@
 		table{
 			font-size: 25px;
 			display: inline-block;
+			margin-top: 30px;
 		}
 		th{
 			border: 1px solid #333;
@@ -19,10 +20,37 @@
 			border-left: 0;
 			border-top: 0;
 		}
-		#btn-box{
+		#left-div,#right-div{
 			display: inline-block;
+			position: relative;
 		}
-		#btn-box .btn{
+		#left-div{
+			top: -5px;
+		}
+		#right-div{
+			top: -460px;
+		}
+		.box{
+			background: #f1f1f1;
+		}
+		#left-div .box{
+			height: 250px;
+			margin-bottom: 20px;
+		}
+		#right-div .box{
+			height: 520px;
+			width: 250px;
+		}
+		.box .top{
+			width: 100%;
+			background: #708090;
+			display: inline-block;
+			line-height: 40px;
+			margin-bottom: 20px;
+			color: #fff;
+			font-weight: bolder;
+		}
+		.box .btn{
 			/*border: 1px solid black;*/
 			color: #fff;
 			width: 143px;
@@ -30,22 +58,30 @@
 			line-height: 40px;
 			display: block;
 			/*padding: 5px 30px;*/
-			margin-top: 15px;
+			margin: 15px 30px;
 			cursor: pointer;
 			background:#b1b1b1 url(img/bg10.jpg) no-repeat left top;
 		}
-		#btn-box .btn:hover{
+		.box .btn:hover{
 			background:#b1b1b1 url(img/bg10.jpg) no-repeat left -40px;
 		}
 	</style>
 </head>
 <body>
 <center>
-	<div id="btn-box">
-		<span class="btn">初级</span>
-		<span class="btn">中级</span>
-		<span class="btn">高级</span>
+	<div id="left-div">
+		<div class="box">
+			<span class="top">规&nbsp则</span>
+			<span></span>
+		</div>
+		<div id="btn-box" class="box">
+			<span class="top">等&nbsp级</span>
+			<span class="btn">初级</span>
+			<span class="btn">中级</span>
+			<span class="btn">高级</span>
+		</div>
 	</div>
+	
 	<table cellspacing="0">
 		<tr>
 			<th></th>
@@ -147,6 +183,12 @@
 			<th></th>
 		</tr>
 	</table>
+	<div id="right-div">
+		<div class="box">
+			<span class="top">游戏介绍</span>
+			<span></span>
+		</div>
+	</div>
 </center>
 <script>
 	function randomIntNum(min,max,num){//获取num个min~max之间的数字,min与max正负均可
@@ -275,16 +317,31 @@
 		for (var i = 0; i < aTh.length; i++) {//给未被选中的位置绑点击事件
 			if(!aTh[i].index){
 				aTh[i].innerHTML = "";
-				aTh[i].onclick = function(){	
-					if(this.innerHTML=='' || this.innerHTML=='9')
-						this.innerHTML = 1;
-					else
-						this.innerHTML++;
+				aTh[i].onmousedown = function(e){	
+					var btnNum = e.button;
+					switch(btnNum){
+						case 0:
+							if(this.innerHTML=='' || this.innerHTML=='9')
+								this.innerHTML = 1;
+							else
+								this.innerHTML++;
+							break;
+						case 2:
+							if(this.innerHTML=='' || this.innerHTML=='1')
+								this.innerHTML = 9;
+							else
+								this.innerHTML--;
+							break;
+						default:
+							this.innerHTML = 5;
+							break;
+					}
 					mistake();
 				}
 			}
 		}
 	}
+	var oTable = document.getElementsByTagName('table')[0];
 	aTh = document.getElementsByTagName('th');
 	var oBtnBox = document.getElementById('btn-box')[0],
 	aBtn = getClass('btn',oBtnBox);
@@ -297,6 +354,15 @@
 			aTh[i].style.borderTop = "4px solid black";
 		if(i%9 == 0)
 			aTh[i].style.borderLeft = "4px solid black";
+	}
+
+	window.onload = function(){
+		oTable.oncontextmenu = function(e){
+			e.preventDefault();
+		}
+		oTable.onmousedown = function(e){
+			e.preventDefault();
+		}
 	}
 	var locat = randomIntNum(0,80,50);
 	Refresh(locat);
