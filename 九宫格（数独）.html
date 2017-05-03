@@ -23,12 +23,13 @@
 		#left-div,#right-div{
 			display: inline-block;
 			position: relative;
+			width: 220px;
 		}
 		#left-div{
 			top: -5px;
 		}
 		#right-div{
-			top: -460px;
+			top: -70px;
 		}
 		.box{
 			background: #f1f1f1;
@@ -39,7 +40,12 @@
 		}
 		#right-div .box{
 			height: 520px;
-			width: 250px;
+			
+		}
+		.box .text{
+			display: inline-block;
+			text-align: left;
+			padding: 0px 20px;
 		}
 		.box .top{
 			width: 100%;
@@ -71,8 +77,17 @@
 <center>
 	<div id="left-div">
 		<div class="box">
-			<span class="top">规&nbsp则</span>
-			<span></span>
+			<span class="top">说&nbsp明</span>
+			<span class="text">
+				在白色方块内点击鼠标更改数值<br>
+				点击左键：数字增加;<br>
+				点击右键：数字减小;<br>
+				点击中键：数字改为5;<br>
+				<br>
+				初级：保留50个数<br>
+				中级：保留35个数<br>
+				高级：保留20个数
+			</span>
 		</div>
 		<div id="btn-box" class="box">
 			<span class="top">等&nbsp级</span>
@@ -186,7 +201,11 @@
 	<div id="right-div">
 		<div class="box">
 			<span class="top">游戏介绍</span>
-			<span></span>
+			<span class="text">
+				数独是源自18世纪瑞士的一种数学游戏。是一种运用纸、笔进行演算的逻辑游戏。玩家需要根据9×9盘面上的已知数字，推理出所有剩余空格的数字，并满足每一行、每一列、每一个粗线宫（3*3）内的数字均含1-9，不重复。
+				<br>
+				数独盘面是个九宫，每一宫又分为九个小格。在这八十一格中给出一定的已知数字和解题条件，利用逻辑和推理，在其他的空格上填入1-9的数字。使1-9每个数字在每一行、每一列和每一宫中都只出现一次，所以又称“九宫格”。
+			</span>
 		</div>
 	</div>
 </center>
@@ -301,7 +320,7 @@
 			aTh[i].style.backgroundColor = "#fff";
 			aTh[i].index = 0;
 			aTh[i].style.color = "black";
-			aTh[i].onclick = function(){}
+			aTh[i].onmousedown = function(){}
 		}
 	}
 	function Refresh(locat){	
