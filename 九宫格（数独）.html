@@ -259,7 +259,7 @@
 		}
 		return true;
 	}
-	function produce(n){//产生一个合法的数字
+	function produce(n){//产生一个合法的数字（递归产生一个合法的九宫格）
 		if(n > 80)
 			return true;
 		var num = randomIntNum(1,9,9);
@@ -356,14 +356,21 @@
 							break;
 					}
 					mistake();
+					win();
 				}
 			}
 		}
 	}
 	function win(){
-//	for (var i = 0; i < aTh.length; i++) {
-//		// aTh[i].aaaaa
-//		}
+		var a=true;
+		for (var i = 0; i < aTh.length; i++) {
+			if(aTh[i].style.color=="red"||aTh[i].innerHTML==""){
+				a=false;
+			}
+		}
+		if(a){
+			console.log("赢了");
+		}
 	}
 	var oTable = document.getElementsByTagName('table')[0];
 	aTh = document.getElementsByTagName('th');
@@ -380,7 +387,7 @@
 			aTh[i].style.borderLeft = "4px solid black";
 	}
 
-	window.onload = function(){
+	window.onload = function(){//取消鼠标原有的事件
 		oTable.oncontextmenu = function(e){
 			e.preventDefault();
 		}
