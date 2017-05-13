@@ -8,6 +8,9 @@
 			margin: 0;
 			padding: 0;	
 		}
+		body{
+			margin-top: 50px;
+		}
 		table{
 			font-size: 25px;
 			display: inline-block;
@@ -70,6 +73,52 @@
 		}
 		.box .btn:hover{
 			background:#b1b1b1 url(img/bg10.jpg) no-repeat left -40px;
+		}
+		#popup-box{
+			background: rgba(0,0,0,0.6);
+			position: fixed;
+			left:0;
+			top:0;
+			right: 0;
+			bottom: 0;
+			z-index:99;
+			display: none;
+		}
+		#popup-box .popup{
+			width: 350px;
+			height: 200px;
+			background: #fff;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -175px;
+			margin-top: -100px;
+		}
+		#popup-box .popup>p{
+			width: 100%;
+			background: #ccc;
+			height: 30px;
+		}
+		#popup-box .popup>p>span{
+			float: right;
+			display: inline-block;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+		#popup-box .popup-body{
+			padding: 20px 40px;
+		}
+		#popup-box .popup-body .bt-box{
+			margin: 50px 50px;
+		}
+		#popup-box .popup-body span{
+			border: 1px solid #ccc;
+			background: #e6e6fa;
+			padding: 5px 20px;
+			cursor: pointer;
+		}
+		#popup-box .popup-body span:first-child{
+			margin-right: 30px;
 		}
 	</style>
 </head>
@@ -209,6 +258,18 @@
 		</div>
 	</div>
 </center>
+<div id="popup-box">
+	<div class="popup">
+		<p><span>X</span></p>
+		<div class="popup-body">
+			<p class="text">恭喜你获得胜利，是否开始新的一局</p>
+			<div class="bt-box">
+				<span>是</span>
+				<span>否</span>
+			</div>		
+		</div>
+	</div>
+</div>
 <script>
 	function randomIntNum(min,max,num){//获取num个min~max之间的数字,min与max正负均可
 		if(isNaN(min))
@@ -369,13 +430,30 @@
 			}
 		}
 		if(a){
-			console.log("赢了");
+			oPopup.style.display = "block";
+			aPopBtn[0].onclick = function(){
+				oPopup.style.display = "none";
+			}
+			aPopBtn[1].onclick = function(){
+				oPopup.style.display = "none";
+				locat = randomIntNum(0,80,n);
+				clear();
+				Refresh(locat);
+			}
+			aPopBtn[2].onclick = function(){
+				oPopup.style.display = "none";
+			}
 		}
 	}
 	var oTable = document.getElementsByTagName('table')[0];
 	aTh = document.getElementsByTagName('th');
 	var oBtnBox = document.getElementById('btn-box')[0],
 	aBtn = getClass('btn',oBtnBox);
+	oPopup = document.getElementById('popup-box');
+	// var oBtnBx = getClass('bt-box',oPopup)[0];
+	aPopBtn = oPopup.getElementsByTagName('span');
+	oText = getClass('text',oPopup)[0];
+	n = 50;
 	for (var i = 0; i < aTh.length; i++) {//将网格分为9大块（黑线）
 		if((i+1) % 3 == 0)
 			aTh[i].style.borderRight = "4px solid black";
@@ -394,16 +472,22 @@
 		oTable.onmousedown = function(e){
 			e.preventDefault();
 		}
+		oPopup.oncontextmenu = function(e){
+			e.preventDefault();
+		}
+		oPopup.onmousedown = function(e){
+			e.preventDefault();
+		}
 	}
-	var locat = randomIntNum(0,80,50);
+	var locat = randomIntNum(0,80,n);
 	Refresh(locat);
 	for (var j = 0; j < aBtn.length; j++) {
 		aBtn[j].index = j;
 		aBtn[j].onclick = function(){
 			switch(this.index){
-				case 0:locat = randomIntNum(0,80,50);break;
-				case 1:locat = randomIntNum(0,80,35);break;
-				case 2:locat = randomIntNum(0,80,20);break;
+				case 0:n=50; locat = randomIntNum(0,80,n);break;
+				case 1:n=35; locat = randomIntNum(0,80,n);break;
+				case 2:n=20; locat = randomIntNum(0,80,n);break;
 			}
 			clear();
 			Refresh(locat);
