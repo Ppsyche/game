@@ -422,7 +422,7 @@
 			}
 		}
 	}
-	function win(){
+	function win(){//判断是否胜利
 		var a=true;
 		for (var i = 0; i < aTh.length; i++) {
 			if(aTh[i].style.color=="red"||aTh[i].innerHTML==""){
@@ -430,19 +430,24 @@
 			}
 		}
 		if(a){
-			oPopup.style.display = "block";
-			aPopBtn[0].onclick = function(){
-				oPopup.style.display = "none";
-			}
-			aPopBtn[1].onclick = function(){
-				oPopup.style.display = "none";
-				locat = randomIntNum(0,80,n);
-				clear();
-				Refresh(locat);
-			}
-			aPopBtn[2].onclick = function(){
-				oPopup.style.display = "none";
-			}
+			oText.innerHTML = "恭喜你获得胜利，是否开始新的一局";
+			popup(n);
+		}
+	}
+	function popup(m){//弹层的点击事件
+		oPopup.style.display = "block";
+		aPopBtn[0].onclick = function(){
+			oPopup.style.display = "none";
+		}
+		aPopBtn[1].onclick = function(){
+			oPopup.style.display = "none";
+			locat = randomIntNum(0,80,m);
+			n=m;
+			clear();
+			Refresh(locat);
+		}
+		aPopBtn[2].onclick = function(){
+			oPopup.style.display = "none";
 		}
 	}
 	var oTable = document.getElementsByTagName('table')[0];
@@ -484,13 +489,12 @@
 	for (var j = 0; j < aBtn.length; j++) {
 		aBtn[j].index = j;
 		aBtn[j].onclick = function(){
+			oText.innerHTML = "是否放弃本局,放弃后将不能撤回";
 			switch(this.index){
-				case 0:n=50; locat = randomIntNum(0,80,n);break;
-				case 1:n=35; locat = randomIntNum(0,80,n);break;
-				case 2:n=20; locat = randomIntNum(0,80,n);break;
+				case 0:popup(50);break;
+				case 1:popup(35);break;
+				case 2:popup(20);break;
 			}
-			clear();
-			Refresh(locat);
 		}
 	}
 	
