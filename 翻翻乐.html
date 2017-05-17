@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>翻翻乐</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.bg-img{
+			width: 100%;
+			height: 100%;
+			z-index: -999;
+			position: fixed;
+		}
+		table{
+			border-spacing:20px;
+			padding-top: 50px;	
+		}
+		td{
+			width: 150px;
+			height: 150px;
+			background: #aaa;
+		}
+		div.false{
+			width: 150px;
+		    height: 150px;
+		    background: #ccc;
+		}
+	</style>
+	<script src="jquery-1.12.4.min.js"></script>
+	<script>
+		$(function(){
+			function randomIntNum(min,max,num){//获取num个min~max之间的不同数字,min与max正负均可
+				var result = [];
+				var t = 0;
+				while(t != num) {
+					var p = Math.ceil(Math.random()*(max-min+1))+min-1;
+					for (var i = 0; i < t; i++) {
+						if(p == result[i])
+							break;
+					}
+					if(i >= t){
+						result.push(p);
+						t++;
+					}
+				}
+				return result;
+			}
+			var num = randomIntNum(0,17,18);
+			var b = false;
+			for (var i = 0; i < 9; i++) {
+				var n = Math.floor(Math.random()*10)+1;
+				$("td").eq(num[i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
+				$("td").eq(num[17-i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
+				num[i] = n;
+				num[17-i] = n;
+			}
+			// $("td").appendChild("<div class='bg'></div>");
+			// $(".bg").css(width : 150px,
+			// 			 height : 150px,
+			// 			 background : #ccc);
+			$("td div").addClass("false");
+			$("div.false").on("click",function(){
+				$(this).removeClass("false");
+				if(b){
+					if(num[$(".true").index()] == num[$(this).index()]){
+						$(".true").removeClass("true");
+					}else{
+						$(".true").removeClass("true").addClass("false");
+						$(this).addClass("false");
+					}
+					b = false;
+				}else{
+					b = true;
+					$(this).addClass("true");
+				}
+			});
+		})
+	</script>
+</head>
+<body>
+	<img src="img/ffl/bg6.jpg" alt="" class="bg-img">
+	<center>
+		<table>
+			<tr>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+			</tr>
+			<tr>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+			</tr>
+			<tr>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+			</tr>
+		</table>
+	</center>
+</body>
+</html>
