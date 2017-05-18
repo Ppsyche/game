@@ -50,12 +50,13 @@
 			}
 			var num = randomIntNum(0,17,18);
 			var b = false;
+			var eq =  new Array();
 			for (var i = 0; i < 9; i++) {
 				var n = Math.floor(Math.random()*10)+1;
 				$("td").eq(num[i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
 				$("td").eq(num[17-i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
-				num[i] = n;
-				num[17-i] = n;
+				eq[num[i]] = n;
+				eq[num[17-i]] = n;
 			}
 			// $("td").appendChild("<div class='bg'></div>");
 			// $(".bg").css(width : 150px,
@@ -65,7 +66,7 @@
 			$("div.false").on("click",function(){
 				$(this).removeClass("false");
 				if(b){
-					if(num[$(".true").index()] == num[$(this).index()]){
+					if(eq[$("div").index($(".true"))] == eq[$("div").index($(this))]){
 						$(".true").removeClass("true");
 					}else{
 						$(".true").removeClass("true").addClass("false");
