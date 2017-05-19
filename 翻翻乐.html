@@ -11,23 +11,43 @@
 		.bg-img{
 			width: 100%;
 			height: 100%;
-			z-index: -999;
+			z-index: -9;
 			position: fixed;
 		}
 		table{
 			border-spacing:20px;
 			padding-top: 50px;	
 		}
-		td{
+		td,div{
 			width: 150px;
 			height: 150px;
-			background: #aaa;
 		}
-		div.false{
+		td{
+			position: relative;
+			perspective: 1000px;
+		}
+		div{
+			position: absolute;
+			left: 0;
+			top: 0;
+			transition: all 1s ease; 
+			transform-style: preserve-3d; 
+			backface-visibility: hidden;
+		}
+		.front{
+			background: #aaa;
+			z-index: 2;
+			
+		}
+		.back{
+			z-index: 1;
+			transform:rotateY(180deg);
+		}
+		/*div.false{
 			width: 150px;
 		    height: 150px;
 		    background: #ccc;
-		}
+		}*/
 	</style>
 	<script src="jquery-1.12.4.min.js"></script>
 	<script>
@@ -53,27 +73,53 @@
 			var eq =  new Array();
 			for (var i = 0; i < 9; i++) {
 				var n = Math.floor(Math.random()*10)+1;
-				$("td").eq(num[i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
-				$("td").eq(num[17-i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
+				$(".back").eq(num[i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
+				$(".back").eq(num[17-i]).css("background","url(img/ffl/img"+n+".jpg) no-repeat -25px -25px");
 				eq[num[i]] = n;
 				eq[num[17-i]] = n;
 			}
-			$("td div").addClass("false");
-			$("div.false").on("click",function(){
-				$(this).removeClass("false");
+			$("div.front").on("click",function(){
+				$(this).css({'z-index': '1',
+							'transform': 'rotateY(180deg)'})
+						.parent().find(".back")
+						.css({'z-index': '2',
+							'transform': 'rotateY(0deg)'});
 				if(b){
-					if(eq[$("div").index($(".true"))] == eq[$("div").index($(this))]){
-						$(".true").removeClass("true");
-					}else{
-						$(".true").removeClass("true").addClass("false");
-						$(this).addClass("false");
+					if(eq[$("div.front").index($(".true"))] != eq[$("div.front").index($(this))]){
+						$(this).css({'z-index': '2',
+									'transform': 'rotateY(360deg)'})
+								.parent().find(".back")
+								.css({'z-index': '1',
+									'transform': 'rotateY(180deg)'});
+						$(".true").css({'z-index': '2',
+									'transform': 'rotateY(0deg)'})
+								.parent().find(".back")
+								.css({'z-index': '1',
+									'transform': 'rotateY(180deg)'});
 					}
+					$(".true").removeClass("true");
 					b = false;
 				}else{
 					b = true;
 					$(this).addClass("true");
 				}
 			});
+			// $("td div").addClass("false");
+			// $("div.false").on("click",function(){
+			// 	$(this).removeClass("false");
+			// 	if(b){
+			// 		if(eq[$("div").index($(".true"))] == eq[$("div").index($(this))]){
+			// 			$(".true").removeClass("true");
+			// 		}else{
+			// 			$(".true").removeClass("true").addClass("false");
+			// 			$(this).addClass("false");
+			// 		}
+			// 		b = false;
+			// 	}else{
+			// 		b = true;
+			// 		$(this).addClass("true");
+			// 	}
+			// });
 		})
 	</script>
 </head>
@@ -82,28 +128,28 @@
 	<center>
 		<table>
 			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
 			</tr>
 			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
 			</tr>
 			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
+				<td><div class="front"></div><div class="back"></div></td>
 			</tr>
 		</table>
 	</center>
