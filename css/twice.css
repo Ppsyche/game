@@ -1,0 +1,39 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.bg-img{
+	width: 100%;
+	height: 100%;
+	z-index: -9;
+	position: fixed;
+}
+table{
+	border-spacing:20px;
+	padding-top: 50px;	
+}
+td,div{
+	width: 150px;
+	height: 150px;
+}
+td{
+	position: relative;
+	perspective: 1000px;
+}
+div{
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: all 1s ease; 
+	transform-style: preserve-3d; 
+	backface-visibility: hidden;
+}
+.front{
+	background: #aaa;
+	z-index: 2;
+	
+}
+.back{
+	z-index: 1;
+	transform:rotateY(180deg);
+}
