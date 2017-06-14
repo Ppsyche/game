@@ -9,23 +9,32 @@ for (var i = 0; i < 9; i++) {
 	eq[num[17-i]] = n;
 }
 $("div.front").on("click",function(){
-	$(this).css({'z-index': '1',
+	$(this).css({
+				// 'z-index': '1',
 				'transform': 'rotateY(180deg)'})
 			.parent().find(".back")
-			.css({'z-index': '2',
+			.css({
+				// 'z-index': '2',
 				'transform': 'rotateY(0deg)'});
 	if(b){
 		if(eq[$("div.front").index($(".true"))] != eq[$("div.front").index($(this))]){
-			$(this).css({'z-index': '2',
-						'transform': 'rotateY(0deg)'})
-					.parent().find(".back")
-					.css({'z-index': '1',
-						'transform': 'rotateY(180deg)'});
-			$(".true").css({'z-index': '2',
-						'transform': 'rotateY(0deg)'})
-					.parent().find(".back")
-					.css({'z-index': '1',
-						'transform': 'rotateY(180deg)'});
+			// setTimeout(function(){
+                $(this).css({
+                			// 'z-index': '2',
+                			'transform': 'rotateY(0deg)'})
+                		.parent().find(".back")
+                		.css({
+                			// 'z-index': '1',
+                			'transform': 'rotateY(180deg)'});
+                $(".true").css({
+                			// 'z-index': '2',
+                			'transform': 'rotateY(0deg)'})
+                		.parent().find(".back")
+                		.css({
+                			// 'z-index': '1',
+                			'transform': 'rotateY(180deg)'});       
+            // },500);
+			
 		}
 		$(".true").removeClass("true");
 		b = false;

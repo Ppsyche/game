@@ -6,6 +6,7 @@ $("#newGmBtn").on("click",function(){
 	newGame();
 })
 function newGame(){
+	$("#gameover").hide();
 	for (var i = 0; i < 4; i++) {
 		gridNum[i] = new Array();
 		gridBol[i] = new Array();
@@ -21,6 +22,7 @@ function newGame(){
 	$("#score").text(score);
 	getANum();
 	getANum();
+	var bb = [true,true,true,true];
 	$("body").on("keydown",function(e){
 		var id = e.keyCode;
 		for (var i = 0; i < 4; i++)
@@ -28,19 +30,21 @@ function newGame(){
 				gridBol[i][j] = true;
 		switch(id){
 			case 37: 
-				if(left()){getANum();}
+				if(bb[0]=left()){getANum();}
 				break;
 			case 38: 
-				if(up()){getANum();}
+				if(bb[1]=up()){getANum();}
 				break;
 			case 39: 
-				if(right()){getANum();}
+				if(bb[2]=right()){getANum();}
 				break;
 			case 40:
-				if(down()){getANum();}
+				if(bb[3]=down()){getANum();}
 				break;
 		}
-		
+		if(!over()){
+			$("#gameover").show();
+		}
 	});
 }
 function getANum(){//找到一个空白位置，添加数字2，如果找不到，返回false
@@ -106,6 +110,22 @@ function getNumBgColor(number){//数字对应的颜色
             break;
     }
     return color;
+}
+function over(){
+	for (var i = 0; i < 4; i++) {
+		for (var j = 0; j < 4; j++) {
+			if(gridNum[i][j] == ""){
+				return true;
+			}
+			if(j!=3 && gridNum[i][j] == gridNum[i][j+1]){
+				return true;
+			}
+			if(i!=3 && gridNum[i][j] == gridNum[i+1][j]){
+				return true;
+			}
+		}
+	}
+	return false;
 }
 function left(){
 	var bol = true;//是否还有能移动的方块
