@@ -71,10 +71,10 @@ function getClass(clsName,context){//在context下获取class为clsName的元素
 	var result = [];
 	context = context || document;
 	var arr = context.getElementsByTagName('*');
+	var reg = new RegExp('\\b'+clsName+'\\b');
 	for(var i=0; i<arr.length; i++){
-		//class  保留字 .className
-		//'aa bb' == 'aa'   'aacc'
-		if(arr[i].className.indexOf(clsName) != -1){
+		// if(arr[i].className.indexOf(clsName) != -1){
+		if(reg.test(arr[i].className)){
 			result.push(arr[i]);
 		}
 	}

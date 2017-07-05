@@ -1,0 +1,54 @@
+table{
+	margin: 0 auto;
+	overflow: hidden;
+	border-collapse: collapse;
+}
+td{
+	width: 20px;
+	height: 20px;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+.title{
+	margin: 8px auto;
+	font-size: 20px;
+	width: 100px;
+	height: 25px;
+	text-align: center;
+}
+.score{
+	width: 430px;
+	height: 20px;
+	margin: 0 auto 5px;
+	font-size: 15px;
+	overflow: hidden;
+}
+.btn{
+	float: left;
+	color: #fff;
+	background: #f0f;
+	bottom: 0;
+	padding: 3px 10px;
+}
+#your-score{
+	float: right;
+}
+#gameover{
+	width: 300px;
+	height: 100px;
+	font-size: 40px;
+	color: red;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	z-index: 10;
+	display: none;
+}
+.cover{
+	background-color: blue;
+}
+.food{
+	background-color: green;
+}
