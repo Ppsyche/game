@@ -2,12 +2,14 @@ table{
 	margin: 0 auto;
 	overflow: hidden;
 	border-collapse: collapse;
+	border: 1px solid #ccc;
 }
 td{
 	width: 20px;
 	height: 20px;
-	background-color: #eee;
-	border: 1px solid #ccc;
+	/*background-color: #eee;*/
+	/*border: 1px solid #ccc;*/
+	border-radius: 50%;
 }
 .title{
 	margin: 8px auto;
@@ -46,7 +48,7 @@ td{
 	z-index: 10;
 	display: none;
 }
-.cover{
+.snake{
 	background-color: blue;
 }
 .food{
