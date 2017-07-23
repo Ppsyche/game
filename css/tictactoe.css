@@ -92,7 +92,7 @@ body {
 .chess1,.chess2,.chess3,.chess4,.chess5,.chess6{
     border-bottom: 5px solid #050504; 
 }
-.again{
+.footer{
     color: #fff;
     font-size: 25px;
     font-weight: bolder;
@@ -100,5 +100,10 @@ body {
     text-align: center;
     background: #252839;
 }
-
+.footer span{
+    display: inline-block;
+    width: 33%;
+    border-right: 1px solid #050504;
+    border-left: 1px solid #050504;
+}
 
