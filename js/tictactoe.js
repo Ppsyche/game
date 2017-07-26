@@ -98,31 +98,33 @@ function computer(){
 					continue;
 				}
 				//player1下一子下在哪，所组成的长度最长
-				var num=0;
+				var num1=0;//该胜利路径中有几个x
+				var num2=0;//该胜利路径中有几个o
 				for(var k = 0; k < player1.length; k++ ){
 					if(win[j][0]==player1[k]||win[j][1]==player1[k]||win[j][2]==player1[k]){
-						num++;
+						num1++;
 					}
 				}
-				if(num>playNum1){
-					playNum1=num;
-					play1=[i];
-				}else if(num==playNum1){
-					play1.push(i);
-				}
-				//player2下一子下在哪，所组成的长度最长
-				num=0;
 				for(var k = 0; k < player2.length; k++ ){
 					if(win[j][0]==player2[k]||win[j][1]==player2[k]||win[j][2]==player2[k]){
-						num++;
+						num2++;
 					}
 				}
-				if(num>playNum2){
-					playNum2=num;
-					play2=[i];
-				}else if(num==playNum2){
-					play2.push(i);
+				if(num1>0&&num2>0){//当前线路上有别的棋子
+					continue;
 				}
+				if(num1>playNum1){
+					playNum1=num1;
+					play1=[i];
+				}else if(num1==playNum1){
+					play1.push(i);
+				}
+				if(num2>playNum2){
+					playNum2=num2;
+					play2=[i];
+				}else if(num2==playNum2){
+					play2.push(i);
+				}				
 			}
 		}
 	}
